@@ -14,3 +14,7 @@ header {
 h1 {
     color: #fffcfc;
 }
+
+.error {
+   border: 1px solid red;
+}
