@@ -1,161 +1,101 @@
-$(document).ready( readyNow );
-
-let employee = [];
+$(readyNow); 
 
 function readyNow() {
-    $( '#submitBtn' ).on( 'click', handleSubmit);
-    // $( 'tbody' ).on( 'click', '.deleteEmployee', deleteInfo);
-
-    let data = $(`
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Annual Salary</th>
-                </tr>
-            </thead>
-            <tbody>`
-            ) // end let
-    $( 'table' ).append( data );
-
-} // end function
+    $('#submitBtn').on('click', handleSubmit);
+    $('#employeeList').on('click', '.deleteEmployee', handleDelete);
+    } // end function
+    
+let employees = [];
 
 function handleSubmit(){
+    console.log( 'submit click');
    let nameVal = $( '#firstName' ).val();
    let lastVal = $( '#lastName' ).val();
    let idVal = $( '#id' ).val();
    let titleVal = $( '#title' ).val();
    let annuVal = $( '#annual' ).val();
 
-//    if( nameVal === '' ){
-//     alert("Please fill out the First Name input");
-//     $('#firstName').addClass('error');
+    if( nameVal === '' ){
+    alert("Please fill out First Name");
+    $('#firstName').addClass('error');
 
-// } else if( lastVal === ''){
-//     alert("Please fill out the Last Name input");
-//     $('#lastName').addClass('error');
+} else if( lastVal === ''){
+    alert("Please fill out Last Name");
+    $('#lastName').addClass('error');
 
-// } else if( idVal === ''){
-//     alert("Please fill out the ID input");
-//     $('#id').addClass('error');
+} else if( idVal === ''){
+    alert("Please fill out ID");
+    $('#id').addClass('error');
 
-// } else if( titleVal === ''){
-//     alert("Please fill out the Title input");
-//     $('#title').addClass('error');
+} else if( titleVal === ''){
+    alert("Please fill out Title");
+    $('#title').addClass('error');
 
-// } else if( annuVal === ''){
-//     alert("Please fill out the Annual Salary input");
-//     $('#annual').addClass('error');
+} else if( annuVal === ''){
+    alert("Please fill out Annual Salary");
+    $('#annual').addClass('error');
 
-// } else {
-//     $('#firstName').removeClass('error');
-//     $('#lastName').removeClass('error');
-//     $('#id').removeClass('error');
-//     $('#title').removeClass('error');
-//     $('#annual').removeClass('error');
+} else {
+    $('#firstName').removeClass('error');
+    $('#lastName').removeClass('error');
+    $('#id').removeClass('error');
+    $('#title').removeClass('error');
+    $('#annual').removeClass('error');
 
-    let newInfo = {
-        name: nameVal,
-        last: lastVal,
-        id: idVal,
-        title: titleVal,
-        annul: annuVal
-    } // end let newInfo
+let newInfo = {
+    name: nameVal,
+    last: lastVal,
+    id: idVal,
+    title: titleVal,
+    annul: annuVal
+} // end let newInfo
 
-    employee.push( newInfo );
-
-    listOfEmployee();
+    employees.push(newInfo);
+    listOfEmployees();
 
     $( '#firstName' ).val('');
     $( '#lastName' ).val('');
     $( '#id' ).val('');
     $( '#title' ).val('');
     $( '#annual' ).val('');
-
-    console.log( newInfo );
- // end else statement
+    } // if statement
 } // end function
 
-function listOfEmployee(){
-    $('tbody').empty();
-    console.log(employee);
-    
-    let totalMoney = 0;
-    // employee.forEach(function (employee){
-
-    for( person of employee ){
-        let $data = `
+function listOfEmployees(){
+    $('#employeeList').empty();
+let totalMoney = 0;
+    employees.forEach(function (person){
+        let $tr = `
             <tr id="info">
                 <td>${person.name}</td>
                 <td>${person.last}</td>
                 <td>${person.id}</td>
                 <td>${person.title}</td>
                 <td>${person.annul}</td>
-            <td><button class="deleteEmployee">Delete</button></td>
-            </tr>
-            `;
-            // end let
-            // $data.data( 'employee', employee );
-        $( 'table tbody' ).append( $data );
-        // employees.forEach(function (employee){
-            let monthly = person.annul / 12;
-            totalMoney += monthly;
-            // })
-            $('#monthly').empty();
-            $('#monthly').append('Total Monthly: $'+totalMoney);
-            if (totalMoney > 20000){
-                $('#monthly').addClass('red');
-            } else {
-                $('#monthly').removeClass('red');
-            }
+                <td><button class="deleteEmployee" data-name="${person.name}">Delete</button></td>
+            </tr>`; // end $tr
+    $('#employeeList').append($tr);
+    let monthly = person.annul / 12;
+     totalMoney += monthly;
+}) // end forEach
 
-            $( '.deleteEmployee' ).click(function(){
-                $(this).parents("tr").remove();
-            })
-    } // end for loop
-    
-} // end function
+    $('#monthly').empty();
+    $('#monthly').append('Total Monthly: $'+ totalMoney);
+    if (totalMoney > 20000){
+    $('#monthly').addClass('red');
+} else {
+    $('#monthly').removeClass('red');
+    } // end else    
+} // end listOfEmployees
 
+function handleDelete(){
 
-// function activateDelete(){
-//     let $thisRow = $(this).parent().parent();
-//     $thisRow.remove();
-    
-// }
-
-// function handlerDelete() {
-// //     // let deleteInfo = $(this).data('employee');
-// //     // $(this).remove(employee);
-// //     // console.log( 'this is a secret favourite food:', deleteInfo );
-    // $( '.deleteEmployee' ).on( 'click', deleteInfo);
-    // console.log( 'hello Btn');
-// //     console.log( 'button click' );
-// //     // $('td').append(`<td><button class="deleteEmployee">Delete</button></td>`)
-// }
-
-// function deleteInfo(){
-//     $(this).parent("tr").remove();
-//     $('#info').remove();
-//     // $('td').remove();
-//     console.log( 'hello world');
-//     // $( '.deleteEmployee' ).remove();
-// }
-
-// // function addSalary(){
-// //     let total = 0;
-
-// //     employees.forEach(function (employee){
-// //     let monthly = employee.annuVal / 12;
-// //     total += monthly;
-// //     }
-
-// //     $('#monthly').empty();
-// //     $('#monthly').append('Total Monthly: $'+total);
-// //     if (totalMonthly > 20000){
-// //         $('#monthly').addClass('red');
-// //     } else {
-// //         $('#monthly').removeClass('red');
-// //     }
-// // }
+    let $name = $(this).data('name');
+    console.log('button click');
+    for (let i = 0; i < employees.length; i++){
+    if ($name === employees[i].name){
+    employees.splice(i, 1);
+        } // end if
+    } // end for
+    listOfEmployees(); 
+} // end handleDelete
