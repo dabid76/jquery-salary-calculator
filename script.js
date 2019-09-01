@@ -72,6 +72,7 @@ let totalMoney = 0;
                 <td>${person.id}</td>
                 <td>${person.title}</td>
                 <td>${person.annul}</td>
+<<<<<<< HEAD
                 <td><button class="deleteEmployee" data-name="${person.name}">Delete</button></td>
             </tr>`; // end $tr
     $('#employeeList').append($tr);
@@ -99,3 +100,31 @@ function handleDelete(){
     } // end for
     listOfEmployees(); 
 } // end handleDelete
+=======
+            <td><button class="deleteEmployee">Delete</button></td>
+            </tr>
+            `;
+            // end let
+            // $data.data( 'employee', employee );
+        $( 'table tbody' ).append( $data );
+        // employees.forEach(function (employee){
+            let monthly = person.annul / 12;
+            totalMoney += monthly;
+            // })
+            $('#monthly').empty();
+            $('#monthly').append('Total Monthly: $'+totalMoney);
+            if (totalMoney > 20000){
+                $('#monthly').addClass('red');
+            } else {
+                $('#monthly').removeClass('red');
+            }
+
+            $( '.deleteEmployee' ).click(function(){
+                $(this).parents("tr").remove();
+            })
+    } // end for loop
+    
+} // end function
+
+
+>>>>>>> 035c7d6c157e6b7d2b1e460870bf4bd5ff019dbe
