@@ -72,7 +72,6 @@ let totalMoney = 0;
                 <td>${person.id}</td>
                 <td>${person.title}</td>
                 <td>${person.annul}</td>
-<<<<<<< HEAD
                 <td><button class="deleteEmployee" data-name="${person.name}">Delete</button></td>
             </tr>`; // end $tr
     $('#employeeList').append($tr);
