@@ -4,7 +4,6 @@ function readyNow() {
     $('#submitBtn').on('click', handleSubmit);
     $('#employeeList').on('click', '.deleteEmployee', handleDelete);
     } // end function
-    
 let employees = [];
 
 function handleSubmit(){
